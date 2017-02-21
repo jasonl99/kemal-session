@@ -1,5 +1,5 @@
 require "../engine"
-
+require "../storable_object.cr"
 class Session
   class FileEngine < Engine
     class StorageInstance
@@ -40,7 +40,7 @@ class Session
         string: String,
         float: Float64,
         bool: Bool,
-        object: StorableObjects
+        object: xSession::StorableObjects
       })
     end
 
@@ -176,7 +176,7 @@ class Session
       string: String,
       float: Float64,
       bool: Bool,
-      object: StorableObjects,
+      object: Session::StorableObjects,
     })
   end
 end
