@@ -40,7 +40,7 @@ class Session
         string: String,
         float: Float64,
         bool: Bool,
-        object: xSession::StorableObjects
+        object: Session::StorableObject::StorableObjects
       })
     end
 
@@ -176,7 +176,7 @@ class Session
       string: String,
       float: Float64,
       bool: Bool,
-      object: Session::StorableObjects,
+      object: Session::StorableObject::StorableObjects
     })
   end
 end
