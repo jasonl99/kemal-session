@@ -1,5 +1,5 @@
 require "../engine"
-
+require "../storable_object.cr"
 class Session
   class MemoryEngine < Engine
     class StorageInstance
@@ -49,7 +49,7 @@ class Session
         string: String,
         float: Float64,
         bool: Bool,
-        object: StorableObjects
+        object: Session::StorableObject::StorableObjects
       })
     end
 
@@ -63,7 +63,7 @@ class Session
       before = (Time.now - Session.config.timeout.as(Time::Span)).epoch_ms
       @store.each do |id, entry|
         last_access_at = Int64.from_json(entry, root: "last_access_at")
-        Session.destroy(id: id) if last_access_at < before
+        Session.timeout(id) if last_access_at < before
       end
       sleep Session.config.gc_interval
     end
@@ -140,7 +140,7 @@ class Session
       string: String,
       float: Float64,
       bool: Bool,
-      object: StorableObjects,
+      object: Session::StorableObject::StorableObjects
     })
   end
 end
